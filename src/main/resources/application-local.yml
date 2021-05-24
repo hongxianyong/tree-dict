@@ -1,0 +1,13 @@
+spring:
+  datasource:
+#    目前只提供 MySQL 版本的数据表，在项目根目录下的 db 文件夹中，如需使用其他数据库请参考 db 文件夹下的数据表照葫芦画瓢
+#    MySQL 配置请打开以下注释
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tree_dict?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: DBAhongxy
+    password: 1qaz!QAZ
+#    Oracle 配置请打开以下注释
+#    driver-class-name: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:@localhost:1521:tree_dict
+#    username: DBAhongxy
+#    password: 1qaz!QAZ

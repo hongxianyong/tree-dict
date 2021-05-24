@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: local
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    - classpath*:mapper/**/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      table-underline: true
+#      logic-delete-value: "now()" #逻辑删除值是个db获取时间的函数
+#      logic-not-delete-value: "0" #逻辑未删除值为字符串 "0"
