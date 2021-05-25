@@ -180,7 +180,7 @@ public class TreeDictServiceImpl extends ServiceImpl<TreeDictMapper, TreeDictPO>
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void deleteByCode(String code, String namespace) {
+    public void delete(String code, String namespace) {
         TreeDictPO treeDict = this.findByCode(code, namespace);
         if (Objects.nonNull(treeDict)) {
             delete(treeDict);
@@ -192,9 +192,7 @@ public class TreeDictServiceImpl extends ServiceImpl<TreeDictMapper, TreeDictPO>
      *
      * @param treeDict 要删除的节点
      */
-    @Transactional(rollbackFor = Exception.class)
-    @Override
-    public void delete(TreeDictPO treeDict) {
+    private void delete(TreeDictPO treeDict) {
         Long left = treeDict.getLeftValue();
         Long right = treeDict.getRightValue();
         // 删除自己和子孙节点
@@ -213,8 +211,7 @@ public class TreeDictServiceImpl extends ServiceImpl<TreeDictMapper, TreeDictPO>
      * @param id 主键
      * @return 树形字典项
      */
-    @Override
-    public TreeDictPO findById(String id) {
+    private TreeDictPO findById(String id) {
         return this.getById(id);
     }
 
@@ -228,18 +225,6 @@ public class TreeDictServiceImpl extends ServiceImpl<TreeDictMapper, TreeDictPO>
     @Override
     public List<TreeDictPO> findChildren(String code, String namespace) {
         TreeDictPO treeDict = this.findByCode(code, namespace);
-        return this.findChildren(treeDict.getLeftValue(), treeDict.getRightValue());
-    }
-
-    /**
-     * 根据 id 查找子孙节点（不包含自己）
-     *
-     * @param id 主键
-     * @return 子孙节点集合
-     */
-    @Override
-    public List<TreeDictPO> findChildren(String id) {
-        TreeDictPO treeDict = this.findById(id);
         return this.findChildren(treeDict.getLeftValue(), treeDict.getRightValue());
     }
 
@@ -318,8 +303,7 @@ public class TreeDictServiceImpl extends ServiceImpl<TreeDictMapper, TreeDictPO>
         saveWithCatchDuplicateKeyException(newTreeDict);
     }
 
-    @Override
-    public void deleteSelfAndChildren(Long leftValue, Long rightValue) {
+    private void deleteSelfAndChildren(Long leftValue, Long rightValue) {
         this.remove(Wrappers.<TreeDictPO>lambdaQuery().ge(TreeDictPO::getLeftValue, leftValue).le(TreeDictPO::getRightValue, rightValue));
     }
 
@@ -329,8 +313,7 @@ public class TreeDictServiceImpl extends ServiceImpl<TreeDictMapper, TreeDictPO>
                 .eq(TreeDictPO::getCode, code).eq(TreeDictPO::getNamespace, namespace));
     }
 
-    @Override
-    public List<TreeDictPO> findChildren(Long leftValue, Long rightValue) {
+    private List<TreeDictPO> findChildren(Long leftValue, Long rightValue) {
         return this.list(Wrappers.<TreeDictPO>lambdaQuery().gt(TreeDictPO::getLeftValue, leftValue).lt(TreeDictPO::getRightValue, rightValue));
     }
 

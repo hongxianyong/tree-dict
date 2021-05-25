@@ -117,7 +117,7 @@ class TreeDictApplicationTests {
 
     //    @Test
     public void testDeleteByCode() {
-        treeDictService.deleteByCode("XHD", "Honor of Kings");
+        treeDictService.delete("XHD", "Honor of Kings");
 //        treeDictService.deleteByCode("LS", "Honor of Kings");
     }
 

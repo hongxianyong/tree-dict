@@ -5,13 +5,7 @@ import com.hong.treedict.po.TreeDictPO;
 import com.hong.treedict.service.TreeDictService;
 import com.hong.treedict.service.bo.TreeDictOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -150,23 +144,6 @@ public class TreeDictWebResource {
     }
 
     /**
-     * 根据主键查找节点
-     *
-     * @param id 主键
-     * @return 查找结果
-     */
-    @GetMapping("/find/{id}")
-    public R<TreeDictPO> findById(@PathVariable("id") String id) {
-        try {
-            return R.ok(treeDictService.findById(id));
-        } catch (Exception ex) {
-            // Handle exception.
-            log.error(ex.getMessage(), ex);
-            return R.failed("查询节点失败：" + ex.getMessage());
-        }
-    }
-
-    /**
      * 根据码值和命名空间查找节点
      *
      * @param code      码值
@@ -190,7 +167,7 @@ public class TreeDictWebResource {
      * @param namespace 命名空间
      * @return 根节点
      */
-    @GetMapping("/root/{namespace}")
+    @GetMapping("/root/find/{namespace}")
     public R<TreeDictPO> findRootByNamespace(@PathVariable("namespace") String namespace) {
         try {
             return R.ok(treeDictService.findRootByNamespace(namespace));
@@ -198,24 +175,6 @@ public class TreeDictWebResource {
             // Handle exception.
             log.error(ex.getMessage(), ex);
             return R.failed("查询根节点失败：" + ex.getMessage());
-        }
-    }
-
-    /**
-     * 根据左、右值筛选子孙节点（不包含自己）
-     *
-     * @param leftValue  左值
-     * @param rightValue 右值
-     * @return 子孙节点集合
-     */
-    @GetMapping("/children/range/{left}/{right}")
-    public R<List<TreeDictPO>> findChildren(@PathVariable("left") Long leftValue, @PathVariable("right") Long rightValue) {
-        try {
-            return R.ok(treeDictService.findChildren(leftValue, rightValue));
-        } catch (Exception ex) {
-            // Handle exception.
-            log.error(ex.getMessage(), ex);
-            return R.failed("查询子节点失败：" + ex.getMessage());
         }
     }
 
@@ -243,7 +202,7 @@ public class TreeDictWebResource {
     @DeleteMapping("/delete/{code}/{namespace}")
     public R<?> delete(@PathVariable("code") String code, @PathVariable("namespace") String namespace) {
         try {
-            treeDictService.deleteByCode(code, namespace);
+            treeDictService.delete(code, namespace);
             return R.ok(null);
         } catch (Exception ex) {
             // Handle exception.

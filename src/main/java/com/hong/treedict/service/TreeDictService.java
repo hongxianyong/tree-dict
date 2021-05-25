@@ -18,26 +18,16 @@ public interface TreeDictService extends IService<TreeDictPO> {
     /**
      * 查询
      */
-    TreeDictPO findById(String id);
-
     TreeDictPO findByCode(String code, String namespace);
 
     TreeDictPO findRootByNamespace(String namespace);
 
-    List<TreeDictPO> findChildren(Long leftValue, Long rightValue);
-
     List<TreeDictPO> findChildren(String code, String namespace);
-
-    List<TreeDictPO> findChildren(String id);
 
     /**
      * 删除
      */
-    void delete(TreeDictPO treeDict);
-
-    void deleteByCode(String code, String namespace);
-
-    void deleteSelfAndChildren(Long leftValue, Long rightValue);
+    void delete(String code, String namespace);
 
     /**
      * 插入
