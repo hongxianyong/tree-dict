@@ -87,7 +87,7 @@ class TreeDictApplicationTests {
         l.setDescription("孙权");
         l.setRightCollateralId("1396835784661504001");
         l.setNameSpace("Honor of Kings");
-        treeDictService.insertR(l);
+        treeDictService.insertL(l);
     }
 
     @Test
