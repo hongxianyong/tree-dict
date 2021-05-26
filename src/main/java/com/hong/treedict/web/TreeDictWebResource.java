@@ -5,7 +5,13 @@ import com.hong.treedict.po.TreeDictPO;
 import com.hong.treedict.service.TreeDictService;
 import com.hong.treedict.service.bo.TreeDictOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -47,7 +53,8 @@ public class TreeDictWebResource {
      * @param operation 树节点操作对象
      * @return 统一响应对象
      */
-    public R<?> insertPH(TreeDictOperation operation) {
+    @PostMapping("/insert/ph")
+    public R<?> insertPH(@RequestBody TreeDictOperation operation) {
         try {
             treeDictService.insertPH(operation);
             return R.ok(null);
@@ -64,7 +71,8 @@ public class TreeDictWebResource {
      * @param operation 树节点操作对象
      * @return 统一响应对象
      */
-    public R<?> insertPT(TreeDictOperation operation) {
+    @PostMapping("/insert/pt")
+    public R<?> insertPT(@RequestBody TreeDictOperation operation) {
         try {
             treeDictService.insertPT(operation);
             return R.ok(null);
@@ -81,7 +89,8 @@ public class TreeDictWebResource {
      * @param operation 树节点操作对象
      * @return 统一响应对象
      */
-    public R<?> insertL(TreeDictOperation operation) {
+    @PostMapping("/insert/l")
+    public R<?> insertL(@RequestBody TreeDictOperation operation) {
         try {
             treeDictService.insertL(operation);
             return R.ok(null);
@@ -98,7 +107,8 @@ public class TreeDictWebResource {
      * @param operation 树节点操作对象
      * @return 统一响应对象
      */
-    public R<?> insertR(TreeDictOperation operation) {
+    @PostMapping("/insert/r")
+    public R<?> insertR(@RequestBody TreeDictOperation operation) {
         try {
             treeDictService.insertR(operation);
             return R.ok(null);
@@ -115,7 +125,8 @@ public class TreeDictWebResource {
      * @param operation 树节点操作对象
      * @return 统一响应对象
      */
-    public R<?> insertPL(TreeDictOperation operation) {
+    @PostMapping("/insert/pl")
+    public R<?> insertPL(@RequestBody TreeDictOperation operation) {
         try {
             treeDictService.insertPL(operation);
             return R.ok(null);
@@ -132,7 +143,8 @@ public class TreeDictWebResource {
      * @param operation 树节点操作对象
      * @return 统一响应对象
      */
-    public R<?> insertPR(TreeDictOperation operation) {
+    @PostMapping("/insert/pr")
+    public R<?> insertPR(@RequestBody TreeDictOperation operation) {
         try {
             treeDictService.insertPR(operation);
             return R.ok(null);
